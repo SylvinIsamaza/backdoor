@@ -1,0 +1,6 @@
+[Mon Mar 17 14:54:16 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 14:54:17 2025] Netcat shell access terminated
+[Mon Mar 17 15:03:01 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 15:03:01 2025] Netcat shell access terminated
+[Mon Mar 17 15:26:14 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 15:26:14 2025] Netcat shell access terminated

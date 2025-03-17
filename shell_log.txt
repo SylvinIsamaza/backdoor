@@ -1,0 +1,268 @@
+[Mon Mar 17 14:11:01 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 14:12:09 2025] Connected to Netcat listener at 10.12.72.107:4444
+[Mon Mar 17 14:12:27 2025] Netcat shell access terminated
+[Mon Mar 17 14:14:09 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 14:14:09 2025] Connected to Netcat listener at 10.12.72.107:4444
+[Mon Mar 17 14:14:20 2025] Received command: ls
+[Mon Mar 17 14:14:20 2025] Command output: builds
+cleanup.py
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 14:15:14 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 14:15:14 2025] Connected to Netcat listener at 10.12.72.107:4444
+[Mon Mar 17 14:15:19 2025] Received command: ls
+[Mon Mar 17 14:15:19 2025] Command output: builds
+cleanup.py
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 14:15:23 2025] Received command: cd ..
+[Mon Mar 17 14:15:23 2025] Command output: 
+[Mon Mar 17 14:15:28 2025] Received command: ls
+[Mon Mar 17 14:15:28 2025] Command output: builds
+cleanup.py
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 14:15:53 2025] Received command: cd /home
+[Mon Mar 17 14:15:53 2025] Command output: 
+[Mon Mar 17 14:15:55 2025] Received command: ls
+[Mon Mar 17 14:15:55 2025] Command output: builds
+cleanup.py
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 14:16:02 2025] Received command: cd /home
+[Mon Mar 17 14:16:02 2025] Command output: 
+[Mon Mar 17 14:16:04 2025] Received command: ls
+[Mon Mar 17 14:16:04 2025] Command output: builds
+cleanup.py
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 14:16:07 2025] Received command: ls
+[Mon Mar 17 14:16:07 2025] Command output: builds
+cleanup.py
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 14:16:17 2025] Received command: cat README.md
+[Mon Mar 17 14:16:17 2025] Command output: # CarMovementGame - Educational Backdoor Example
+
+This project demonstrates a simple car movement game built with Pygame, which also includes educational examples of how a backdoor might be implemented. It is designed for educational purposes only to illustrate potential security risks.
+
+**Disclaimer:** This game includes features that simulate backdoor-like behavior, such as logging commands and adding persistence. Use responsibly and only in a safe, controlled environment.
+
+**Ethical and Legal Disclaimer**
+**Educational Context**: The implementation below is provided solely for educational purposes to demonstrate how a backdoor might work. It must be tested in a controlled, isolated environment (e.g., virtual machines on a private network) with explicit consent from all parties involved. Using this code on real systems, public networks, or systems you do not own or have permission to test is illegal and unethical.
+
+**Responsibility:** You are responsible for ensuring that this code is used legally and ethically. Misusing it for malicious purposes is a violation of laws (the Cybercrime Act in Rwanda, or equivalent laws in other jurisdictions) and could result in severe legal consequences.
+
+## Features
+
+-   **Car Movement Game:** A simple game where you can control a car using the arrow keys or WASD keys.
+-   **Dependency Check:** Checks for required dependencies (Pygame) and attempts to install them.
+-   **Simulated Shell Access:** Logs simulated shell commands to a file (`shell_log.txt`).
+-   **Persistence:** Adds the game to the system's startup to run on boot (for educational demonstration).
+-   **Cleanup Script:** Includes a script (`cleanup.py`) to remove the added persistence and logs.
+
+## Usage Development
+1.  **Run the game:**
+
+    ```bash
+    python game.py
+    ```
+
+2.  **Consent:** The game will ask for your consent before proceeding with any simulated backdoor activities.
+
+3.  **Play the game:** Control the car using the arrow keys or WASD keys.
+
+4.  **Cleanup:** To remove the persistence and logs, run the cleanup script:
+
+    ```bash
+    python cleanup.py
+    ```
+
+## Files
+
+-   `game.py`: The main game file containing the game logic and simulated backdoor features.
+-   `cleanup.py`: A script to remove persistence and logs created by the game.
+
+
+## Simulated Backdoor Details
+
+-   **Logging:** The game logs simulated shell commands to `shell_log.txt`. This is to demonstrate how a backdoor might record user activity.
+-   **Persistence:** The game adds itself to the system's startup. This is to demonstrate how a backdoor might ensure it runs every time the system starts.
+
+## Important
+
+-   This project is for educational purposes only.
+-   Do not use this code in a real-world environment without proper authorization.
+-   Be aware of the potential security risks associated with backdoors.
+-   Always practice responsible and ethical behavior when dealing with security-related code.
+
+
+## Building Executable
+
+To convert the Python script into an executable on Linux, you have several options:
+
+### Using PyInstaller
+1. Install PyInstaller:
+    ```bash
+    pip install pyinstaller
+    ```
+
+2. Create the executable:
+    ```bash
+    pyinstaller --onefile game.py
+    ```
+    The executable will be created in the `dist` directory.
+
+### Using cx_Freeze
+1. Install cx_Freeze:
+    ```bash
+    pip install cx_Freeze
+    ```
+
+2. Create a setup.py file:
+    ```python
+    from cx_Freeze import setup, Executable
+
+    setup(
+        name="CarMovementGame",
+        version="1.0",
+        description="Educational Backdoor Example",
+        executables=[Executable("game.py")]
+    )
+    ```
+
+3. Build the executable:
+    ```bash
+    python setup.py build
+    ```
+    The executable will be created in the `build` directory.
+
+**Note:** Make sure to test the executable in a controlled environment as it will contain all the simulated backdoor features.
+
+4. If you want already build executables, you can find it in the `builds` directory.
+
+[Mon Mar 17 14:27:48 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 14:27:48 2025] Netcat shell access terminated
+[Mon Mar 17 14:37:36 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 14:37:36 2025] Netcat shell access terminated
+[Mon Mar 17 14:59:08 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 14:59:08 2025] Netcat shell access terminated
+[Mon Mar 17 15:00:10 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 15:00:11 2025] Netcat shell access terminated
+[Mon Mar 17 15:01:13 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 15:01:14 2025] Netcat shell access terminated
+[Mon Mar 17 15:01:57 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 15:01:57 2025] Netcat shell access terminated
+[Mon Mar 17 15:15:54 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 15:15:54 2025] Netcat shell access terminated
+[Mon Mar 17 15:20:34 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 15:20:34 2025] Connected to Netcat listener at 127.0.0.1:4444
+[Mon Mar 17 15:20:41 2025] Received command: ls
+[Mon Mar 17 15:20:41 2025] Command output: assets
+build
+carmovementgame.spec
+cleanup.py
+cleanup.spec
+dist
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 15:20:46 2025] Received command: cd ..
+[Mon Mar 17 15:20:46 2025] Command output: 
+[Mon Mar 17 15:20:47 2025] Received command: ls
+[Mon Mar 17 15:20:47 2025] Command output: assets
+build
+carmovementgame.spec
+cleanup.py
+cleanup.spec
+dist
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 15:20:55 2025] Netcat shell access terminated
+[Mon Mar 17 15:21:35 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 15:21:35 2025] Connected to Netcat listener at 127.0.0.1:4444
+[Mon Mar 17 15:21:35 2025] Received command: ls
+[Mon Mar 17 15:21:35 2025] Command output: assets
+build
+carmovementgame.spec
+cleanup.py
+cleanup.spec
+dist
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 15:22:01 2025] Received command: ls
+[Mon Mar 17 15:22:01 2025] Command output: assets
+build
+carmovementgame.spec
+cleanup.py
+cleanup.spec
+dist
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 15:22:03 2025] Received command: ls
+[Mon Mar 17 15:22:03 2025] Command output: assets
+build
+carmovementgame.spec
+cleanup.py
+cleanup.spec
+dist
+game.py
+README.md
+requirements.txt
+setup.py
+shell_log.txt
+venv
+
+[Mon Mar 17 15:30:34 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 15:30:35 2025] Netcat shell access terminated
+[Mon Mar 17 15:31:06 2025] Providing shell access using Netcat on Linux:
+[Mon Mar 17 15:31:06 2025] Netcat shell access terminated

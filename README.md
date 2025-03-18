@@ -69,3 +69,16 @@ pip install -r requirements.txt
 -   Always practice responsible and ethical behavior when dealing with security-related code.
 
 
+## Building Executable
+1. To convert the Python script into an executable, you have several options:
+```
+python setup.py
+```
+2. You will find carMovementGame and cleanup in the dist folder 
+
+3. To run the game on linux:
+```bash
+./dist/carMovementGame
+```
+
+4. Use movement keys to move the car around the screen.
